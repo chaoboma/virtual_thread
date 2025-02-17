@@ -69,7 +69,7 @@ public class TileController {
         }catch (Exception e){
 
         }
-        System.out.printf("end - %s%n", Thread.currentThread()) ;
+        //System.out.printf("end - %s%n", Thread.currentThread()) ;
         return tileRes;
     }
 
