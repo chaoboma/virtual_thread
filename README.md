@@ -1,1 +1,1 @@
-Java virtual thread using JDK23.
+Java virtual thread using JDK21.
