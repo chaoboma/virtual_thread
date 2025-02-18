@@ -1,5 +1,8 @@
 server:
   port: 8899
+  jetty:
+    threads:
+      max: 10
 spring:
   threads:
     virtual:
