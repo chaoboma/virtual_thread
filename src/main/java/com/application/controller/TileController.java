@@ -63,6 +63,7 @@ public class TileController {
     public Object getImageType(@PathVariable String layer,@PathVariable String type,@PathVariable String grid, @PathVariable Integer z, @PathVariable Integer x, @PathVariable Integer y){
         log.debug("invoke getImageType, layer:"+layer+",type:"+type+",grid:"+grid+",z:"+z+",x:"+x+",y:"+y);
         //System.out.printf("before - %s%n", Thread.currentThread()) ;
+        log.debug("before - " + Thread.currentThread());
         Object tileRes = null;
         try{
             tileRes = tileService.getImageType(layer,type,grid,z,x,y);
@@ -70,6 +71,7 @@ public class TileController {
 
         }
         //System.out.printf("end - %s%n", Thread.currentThread()) ;
+        log.debug("end - " + Thread.currentThread());
         return tileRes;
     }
 

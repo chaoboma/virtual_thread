@@ -3,7 +3,7 @@ server:
 spring:
   threads:
     virtual:
-      enabled: true
+      enabled: false
   application:
     name: virtual_thread
   datasource:
@@ -13,7 +13,7 @@ spring:
     driver-class-name: org.postgresql.Driver
 logging:
   level:
-    com.application.*: debug
+    com.application.*: info
 
 terrain:
   directory: /mnt/share/data/terrain

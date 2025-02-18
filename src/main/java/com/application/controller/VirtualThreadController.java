@@ -37,4 +37,13 @@ public class VirtualThreadController {
         System.out.printf("after - %s%n", Thread.currentThread()) ;
         return Result.success("task - default...");
     }
+    @GetMapping(value = "/test")
+    public Result<Object> test() throws InterruptedException {
+        log.debug("start");
+        //virtualThreadService.testVirtualThreadTask();
+        //virtualThreadService.testNormalThreadTask();
+        log.debug("end");
+        return Result.success();
+
+    }
 }
