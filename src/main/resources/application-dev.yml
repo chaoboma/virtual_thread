@@ -1,9 +1,13 @@
 server:
-  port: 8899
+  port: 8080
+  tomcat:
+    threads:
+      min-spare: 500
+      max: 1000
 spring:
   threads:
     virtual:
-      enabled: false
+      enabled: true
   application:
     name: virtual_thread
   datasource:
