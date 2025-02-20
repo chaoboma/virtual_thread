@@ -73,14 +73,9 @@ public class TileServiceImpl extends ServiceImpl<CommonMapper, DemoUser> impleme
                     "org.sqlite.JDBC");
             //测试数据源连接
             log.debug("this datasource is null");
-            druidDataSource = dataSourceUtils.createDataSourceConnection(dataSourceInfo);
-            //将新的数据源连接添加到目标数据源map中
-            dataSourceUtils.addDefineDynamicDataSource(druidDataSource,datasourceKey);
+            druidDataSource = dataSourceUtils.createDataSourceConnection(dataSourceInfo,datasourceKey);
+
         }
-
-
-
-
         //log.debug("this datasource is not null");
         if (Objects.nonNull(druidDataSource)){
 
@@ -144,15 +139,8 @@ public class TileServiceImpl extends ServiceImpl<CommonMapper, DemoUser> impleme
                     "org.sqlite.JDBC");
             //测试数据源连接
             log.debug("this datasource is null");
-            druidDataSource = dataSourceUtils.createDataSourceConnection(dataSourceInfo);
-            //将新的数据源连接添加到目标数据源map中
-            dataSourceUtils.addDefineDynamicDataSource(druidDataSource,type);
+            druidDataSource = dataSourceUtils.createDataSourceConnection(dataSourceInfo,type);
         }
-        
-
-
-
-
         //log.debug("this datasource is not null");
         if (Objects.nonNull(druidDataSource)){
 

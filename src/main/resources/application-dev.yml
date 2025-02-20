@@ -4,6 +4,7 @@ server:
     threads:
       min-spare: 500
       max: 1000
+      accept-count: 100000
 spring:
   threads:
     virtual:

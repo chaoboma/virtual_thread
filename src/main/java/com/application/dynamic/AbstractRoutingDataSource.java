@@ -11,8 +11,9 @@ import org.springframework.util.Assert;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @Description: TODO：抽象类AbstractRoutingDataSource，实现动态数据源切换
@@ -25,7 +26,7 @@ public abstract class AbstractRoutingDataSource extends AbstractDataSource
         implements InitializingBean {
     //目标数据源map集合，存储将要切换的多数据源bean信息
     @Nullable
-    private Map<Object, Object> targetDataSources;
+    private ConcurrentHashMap<Object, Object> targetDataSources;
     //未指定数据源时的默认数据源对象
     @Nullable
     private Object defaultTargetDataSource;
@@ -34,7 +35,7 @@ public abstract class AbstractRoutingDataSource extends AbstractDataSource
     private DataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
     //解析targetDataSources之后的DataSource的map集合
     @Nullable
-    private Map<Object, DataSource> resolvedDataSources;
+    private ConcurrentHashMap<Object, DataSource> resolvedDataSources;
     @Nullable
     private DataSource resolvedDefaultDataSource;
 
@@ -46,7 +47,7 @@ public abstract class AbstractRoutingDataSource extends AbstractDataSource
         } else {
             //初始化resolvedDataSources的大小
 
-            this.resolvedDataSources = new HashMap((int)((float)this.targetDataSources.size() / 0.75F), 0.75F);
+            this.resolvedDataSources = new ConcurrentHashMap((int)((float)this.targetDataSources.size() / 0.75F), 0.75F);
             //遍历目标数据源信息map集合，对其中的key，value进行解析
             this.targetDataSources.forEach((key, value) -> {
                 //resolveSpecifiedLookupKey方法没有做任何处理，只是将key继续返回

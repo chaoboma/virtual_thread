@@ -10,8 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @Description: TODO： 数据源信息配置类，读取数据源配置信息并注册成bean。
@@ -44,7 +45,7 @@ public class DynamicDataSourceConfig {
     @Bean
     @Primary
     public DynamicDataSource dynamicDataSource(){
-        Map<Object, Object> dataSourceMap = new HashMap<>(3);
+        ConcurrentHashMap<Object, Object> dataSourceMap = new ConcurrentHashMap<>(3);
         dataSourceMap.put(DbsConstant.sqlite01,masterDataSource());
         dataSourceMap.put(DbsConstant.select,slaveDataSource());
         //设置动态数据源
