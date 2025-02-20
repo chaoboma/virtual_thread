@@ -29,11 +29,6 @@ public class DataSourceUtils {
      */
     public DruidDataSource createDataSourceConnection(DataSourceInfo dataSourceInfo,String datasourceKey) {
         try {
-            try{
-                Thread.sleep(ThreadLocalRandom.current().nextInt(1,201));
-            }catch(Exception e){
-
-            }
 
             defineTargetDataSources = dynamicDataSource.getDefineTargetDataSources();
             DruidDataSource druidDataSourceTmp = null;
@@ -57,7 +52,7 @@ public class DataSourceUtils {
                 //将新的数据源连接添加到目标数据源map中
                 DruidDataSource druidDataSourceOld = addDefineDynamicDataSource(druidDataSource,datasourceKey);
 
-               //System.out.println(druidDataSourceOld.hashCode());
+                //System.out.println(druidDataSourceOld.hashCode());
                 return druidDataSourceOld;
             }else{
                 return druidDataSourceTmp;
