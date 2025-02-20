@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8899
   tomcat:
     threads:
       min-spare: 500
@@ -24,4 +24,4 @@ terrain:
   directory: /mnt/share/data/terrain
 
 image:
-  directory: D:\test\tile_service\data
+  directory: /home/tile_service/data
