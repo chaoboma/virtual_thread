@@ -18,7 +18,7 @@ spring:
     driver-class-name: org.postgresql.Driver
 logging:
   level:
-    com.application.*: info
+    com.application.*: debug
 
 terrain:
   directory: /mnt/share/data/terrain

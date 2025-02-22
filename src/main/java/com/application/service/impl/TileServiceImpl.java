@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.io.File;
 import java.util.Objects;
@@ -97,6 +98,71 @@ public class TileServiceImpl extends ServiceImpl<CommonMapper, DemoUser> impleme
             //druidDataSource.close();
         }
         return res;
+    }
+    @Override
+    public Mono<Object> getImageTypeMono(String layer, String type, String grid, Integer z, Integer x, Integer y){
+        String dirSeparator = System.getProperty("file.separator");
+        //log.debug("dirSeparator:"+dirSeparator);
+        String dirLastStr = imageDirectory.substring(imageDirectory.length() - 1);
+        String sqlitePath = "";
+        if(dirSeparator.equals(dirLastStr)){
+            sqlitePath = imageDirectory+layer+dirSeparator+type+".sqlite";
+        }else{
+
+            sqlitePath = imageDirectory+dirSeparator+layer+dirSeparator+type+".sqlite";
+
+
+        }
+        if(!new File(sqlitePath).exists()){
+            return null;
+        }
+        Object res = null;
+        if(grid.equals("wmts")){
+            y = (1<<(z)) -1 - y;
+        }
+
+
+        String sql = "select tile_data from tiles where zoom_level="+z+" and tile_column="+x+" and tile_row="+y+" limit 1";
+        //log.debug("sql:"+sql);
+
+        String datasourceKey = layer+"_"+type;
+        DruidDataSource druidDataSource = dataSourceUtils.findDataSource(datasourceKey);
+
+        if(druidDataSource == null){
+            //3、从数据库获取连接信息，然后获取数据
+            //模拟从数据库中获取的连接
+            DataSourceInfo dataSourceInfo = new DataSourceInfo(
+                    "jdbc:sqlite:"+sqlitePath,
+                    "",
+                    "",
+                    datasourceKey,
+                    "org.sqlite.JDBC");
+            //测试数据源连接
+            log.debug("this datasource is null");
+            druidDataSource = dataSourceUtils.createDataSourceConnection(dataSourceInfo,datasourceKey);
+
+        }
+        //log.debug("this datasource is not null");
+        if (Objects.nonNull(druidDataSource)){
+
+            //设置当前线程数据源名称-----代码形式
+            DynamicDataSourceHolder.setDynamicDataSourceKey(datasourceKey);
+            //在新的数据源中查询用户信息
+
+            try{
+                log.debug("query start:"+System.currentTimeMillis());
+                res = commonMapper.querySql(sql);
+
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            log.debug("query end:"+System.currentTimeMillis());
+
+            //关闭数据源连接
+            //druidDataSource.close();
+        }
+        return (Mono<Object>) res;
     }
     @Override
     //@DS("sqlite")
