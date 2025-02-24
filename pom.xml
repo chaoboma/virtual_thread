@@ -63,13 +63,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!-- 排除 Tomcat
+            <!-- 排除 Tomcat-->
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>
 
         </dependency>
         <dependency>
@@ -83,11 +83,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- 添加 Jetty 启动器依赖
+        <!-- 添加 Jetty 启动器依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jetty</artifactId>
-        </dependency>-->
+        </dependency>
         <!--druid-->
         <dependency>
             <groupId>com.alibaba</groupId>

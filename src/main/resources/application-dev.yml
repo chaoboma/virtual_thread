@@ -1,10 +1,9 @@
 server:
   port: 8899
-  tomcat:
+  jetty:
     threads:
-      min-spare: 500
-      max: 1000
-      accept-count: 100000
+      min: 1
+      max: 3
 spring:
   threads:
     virtual:
@@ -18,7 +17,7 @@ spring:
     driver-class-name: org.postgresql.Driver
 logging:
   level:
-    com.application.*: debug
+    com.application.*: info
 
 terrain:
   directory: /mnt/share/data/terrain
