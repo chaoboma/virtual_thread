@@ -2,8 +2,8 @@ server:
   port: 8899
   tomcat:
     threads:
-      min-spare: 500
-      max: 1000
+      min-spare: 3
+      max: 40
       accept-count: 100000
 spring:
   threads:
