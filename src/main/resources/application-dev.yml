@@ -3,7 +3,7 @@ server:
   tomcat:
     threads:
       min-spare: 3
-      max: 40
+      max: 4
       accept-count: 100000
 spring:
   threads:
@@ -24,4 +24,4 @@ terrain:
   directory: /mnt/share/data/terrain
 
 image:
-  directory: /home/tile_service/data
+  directory: D:\test\tile_service\data

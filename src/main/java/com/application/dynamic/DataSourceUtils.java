@@ -93,11 +93,31 @@ public class DataSourceUtils {
      * @Description: 从目标数据源map集合中查找是否存在指定名称的数据源
      * @Author zhangyu
      */
-    public  DruidDataSource findDataSource(String dataSourceName) {
+    public DruidDataSource findDataSource(String dataSourceName) {
         defineTargetDataSources = dynamicDataSource.getDefineTargetDataSources();
         if(defineTargetDataSources.containsKey(dataSourceName)){
             return (DruidDataSource)defineTargetDataSources.get(dataSourceName);
         }
         return null;
     }
+//    public DruidDataSource findDataSource(String dataSourceName) {
+//
+//
+//        lock.lock();  // block until condition holds
+//        try {
+//            try{
+//                Thread.sleep(150);
+//            }catch(Exception e){
+//
+//            }
+//
+//            defineTargetDataSources = dynamicDataSource.getDefineTargetDataSources();
+//            if(defineTargetDataSources.containsKey(dataSourceName)){
+//                return (DruidDataSource)defineTargetDataSources.get(dataSourceName);
+//            }
+//            return null;
+//        } finally {
+//            lock.unlock();
+//        }
+//    }
 }
