@@ -152,7 +152,7 @@ public class TileServiceImpl extends ServiceImpl<CommonMapper, DemoUser> impleme
             try{
                 log.debug("query start:"+System.currentTimeMillis());
                 res = commonMapper.querySql(sql);
-
+                //Thread.sleep(150);
 
             }catch(Exception e){
                 e.printStackTrace();

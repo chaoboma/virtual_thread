@@ -2,7 +2,7 @@ server:
   port: 8899
   tomcat:
     threads:
-      min-spare: 3
+      min-spare: 1
       max: 4
       accept-count: 100000
 spring:
@@ -24,4 +24,4 @@ terrain:
   directory: /mnt/share/data/terrain
 
 image:
-  directory: D:\test\tile_service\data
+  directory: /home/tile_service/data
