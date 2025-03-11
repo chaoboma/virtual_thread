@@ -1,19 +1,38 @@
 package com.application.test;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.concurrent.CountDownLatch;
+
 public class VirtualThreadFactoryDemo {
     public static void main(String[] args) {
-        // 创建一个虚拟线程工厂
-        var threadFactory = Thread.ofVirtual().factory();
+        try{
+            // 创建一个虚拟线程工厂
+            var threadFactory = Thread.ofVirtual().factory();
+            int THREAD_NUM = 50000;
+            CountDownLatch taskLatch = new CountDownLatch(THREAD_NUM);
+            Instant start = Instant.now();
+            // 使用虚拟线程执行任务
+            for (int i = 0; i < THREAD_NUM; i++) {
+                var vt = threadFactory.newThread(() -> {
 
-        // 使用虚拟线程执行任务
-        for (int i = 0; i < 10000; i++) {
-            var vt = threadFactory.newThread(() -> {
-                System.out.println("Hello from Virtual Thread: " + Thread.currentThread());
-            });
-            vt.start();
+                    try {
+                        Thread.sleep(1000);
+                        System.out.println("virtual thread finish:"+Thread.currentThread());
+                        taskLatch.countDown();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+                vt.start();
+            }
+            taskLatch.await();
+            Instant end = Instant.now();
+            long duration = Duration.between(start, end).toMillis();
+            System.out.println("duration:" + duration + " ms");
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
-        // 等待所有虚拟线程完成（实际应用中需考虑更优雅的同步机制）
-        // 这里仅作演示，未加入等待逻辑
     }
 }
