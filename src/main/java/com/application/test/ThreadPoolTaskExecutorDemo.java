@@ -38,6 +38,7 @@ public class ThreadPoolTaskExecutorDemo {
             Instant end = Instant.now();
             long duration = Duration.between(start, end).toMillis();
             System.out.println("duration:" + duration + " ms");
+            executor.shutdown();
         }catch(Exception e){
             e.printStackTrace();
         }
