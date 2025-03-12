@@ -64,7 +64,7 @@ public class VirtualThreadServiceImpl implements VirtualThreadService {
                 // 模拟耗时任务
                 try {
                     Thread.sleep(1000);
-                    System.out.println("normal thread finish!");
+                    System.out.println("common thread finish!");
                     taskLatch.countDown();
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -1,24 +1,26 @@
 package com.application.test;
 
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class VirtualThreadPerTaskExecutorDemo {
+public class FixedThreadPoolDemo {
     public static void main(String[] args) {
         try{
             int THREAD_NUM = 5000;
-            ExecutorService virtualThreadExecutor= Executors.newVirtualThreadPerTaskExecutor();
+            ExecutorService pool = Executors.newFixedThreadPool(THREAD_NUM);
             Instant start = Instant.now();
             CountDownLatch taskLatch = new CountDownLatch(THREAD_NUM);
             for (int i = 0; i < THREAD_NUM; i++) {
-                virtualThreadExecutor.execute(() -> {
+                pool.execute(() -> {
                     // 模拟IO阻塞型任务
                     try {
                         Thread.sleep(100);
-                        System.out.println("virtual thread finish:"+Thread.currentThread());
+                        System.out.println("common thread finish:"+Thread.currentThread());
                         taskLatch.countDown();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -32,7 +34,6 @@ public class VirtualThreadPerTaskExecutorDemo {
         }catch(Exception e){
             e.printStackTrace();
         }
-
 
     }
 }
