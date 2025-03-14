@@ -13,8 +13,8 @@ public class ThreadPoolTaskExecutorDemo {
         try{
             int THREAD_NUM = 5000;
             ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-            executor.setCorePoolSize(5000);
-            executor.setMaxPoolSize(10000);
+            executor.setCorePoolSize(4);
+            executor.setMaxPoolSize(100);
             executor.setQueueCapacity(100000);
             executor.setThreadNamePrefix("Async-");
             executor.initialize();
