@@ -1,6 +1,7 @@
 package com.application.controller;
 
 
+import com.application.common.CodeMsg;
 import com.application.common.Result;
 import com.application.service.VirtualThreadService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +23,16 @@ public class VirtualThreadController {
 
     @GetMapping(value = "/virtualThread")
     public Result<Object> virtualThread() throws InterruptedException {
-        log.debug("start");
-        virtualThreadService.testVirtualThreadTask();
-        //virtualThreadService.testNormalThreadTask();
-        log.debug("end");
-        return Result.success();
+        try{
+            log.debug("start");
+            virtualThreadService.testVirtualThreadTask();
+            //virtualThreadService.testNormalThreadTask();
+            log.debug("end");
+            return Result.success();
+        }catch(Exception e){
+            return Result.error(CodeMsg.INTERNAL_EXCEPTION);
+        }
+
 
     }
     @GetMapping("/index")

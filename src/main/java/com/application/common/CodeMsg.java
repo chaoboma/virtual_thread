@@ -6,7 +6,7 @@ public class CodeMsg {
     // 按照模块定义CodeMsg
     // 通用异常
     public static CodeMsg SUCCESS = new CodeMsg(200,"success");
-
+    public static CodeMsg INTERNAL_EXCEPTION = new CodeMsg(500,"Internal Exception");
     public static CodeMsg Failed_Unauthorized = new CodeMsg(401,"please login first");
     public static CodeMsg SERVER_EXCEPTION = new CodeMsg(500100,"服务端异常");
     public static CodeMsg PARAMETER_ISNULL = new CodeMsg(500101,"输入参数为空");
