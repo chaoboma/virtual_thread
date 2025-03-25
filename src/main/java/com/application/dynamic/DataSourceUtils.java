@@ -29,7 +29,7 @@ public class DataSourceUtils {
      * @Description: 根据传递的数据源信息测试数据库连接
      * @Author zhangyu
      */
-    public DruidDataSource createDataSourceConnection(DataSourceInfo dataSourceInfo,String datasourceKey) {
+    public synchronized DruidDataSource createDataSourceConnection(DataSourceInfo dataSourceInfo,String datasourceKey) {
         try {
 
             defineTargetDataSources = dynamicDataSource.getDefineTargetDataSources();
@@ -70,23 +70,32 @@ public class DataSourceUtils {
      * @Description: 将新增的数据源加入到备份数据源map中
      * @Author zhangyu
      */
+//    public DruidDataSource addDefineDynamicDataSource(DruidDataSource druidDataSource, String dataSourceName){
+//        lock.lock();  // block until condition holds
+//        try {
+//            defineTargetDataSources = dynamicDataSource.getDefineTargetDataSources();
+//            if(!defineTargetDataSources.containsKey(dataSourceName)){
+//                defineTargetDataSources.put(dataSourceName, druidDataSource);
+//                dynamicDataSource.setTargetDataSources(defineTargetDataSources);
+//                dynamicDataSource.afterPropertiesSet();
+//                return druidDataSource;
+//            }else {
+//                return (DruidDataSource)defineTargetDataSources.get(dataSourceName);
+//            }
+//        } finally {
+//            lock.unlock();
+//        }
+//    }
     public DruidDataSource addDefineDynamicDataSource(DruidDataSource druidDataSource, String dataSourceName){
-        lock.lock();  // block until condition holds
-        try {
-            defineTargetDataSources = dynamicDataSource.getDefineTargetDataSources();
-            if(!defineTargetDataSources.containsKey(dataSourceName)){
-                defineTargetDataSources.put(dataSourceName, druidDataSource);
-                dynamicDataSource.setTargetDataSources(defineTargetDataSources);
-                dynamicDataSource.afterPropertiesSet();
-                return druidDataSource;
-            }else {
-                return (DruidDataSource)defineTargetDataSources.get(dataSourceName);
-            }
-        } finally {
-            lock.unlock();
+        defineTargetDataSources = dynamicDataSource.getDefineTargetDataSources();
+        if(!defineTargetDataSources.containsKey(dataSourceName)){
+            defineTargetDataSources.put(dataSourceName, druidDataSource);
+            dynamicDataSource.setTargetDataSources(defineTargetDataSources);
+            dynamicDataSource.afterPropertiesSet();
+            return druidDataSource;
+        }else {
+            return (DruidDataSource)defineTargetDataSources.get(dataSourceName);
         }
-
-
 
     }
     /**
