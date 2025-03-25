@@ -1,6 +1,8 @@
 server:
   port: 8899
   tomcat:
+    protocol: org.apache.coyote.http11.Http11NioProtocol
+    use-direct-buffers: true
     threads:
       min-spare: 1
       max: 4
@@ -24,4 +26,4 @@ terrain:
   directory: /mnt/share/data/terrain
 
 image:
-  directory: /home/tile_service/data
+  directory: D:\test\tile_service\data
