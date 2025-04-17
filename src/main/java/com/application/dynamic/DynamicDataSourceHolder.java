@@ -30,7 +30,7 @@ public class DynamicDataSourceHolder {
      */
     public static String getDynamicDataSourceKey(){
         String key = DYNAMIC_DATASOURCE_KEY.get();
-        return key == null ? DbsConstant.select : key;
+        return key == null ? DbsConstant.master : key;
     }
 
     /**

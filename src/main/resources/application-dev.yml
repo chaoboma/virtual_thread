@@ -1,8 +1,6 @@
 server:
   port: 8899
   tomcat:
-    protocol: org.apache.coyote.http11.Http11NioProtocol
-    use-direct-buffers: true
     threads:
       min-spare: 1
       max: 4
@@ -14,10 +12,20 @@ spring:
   application:
     name: virtual_thread
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowMultiQueries=true
-    username: postgres
-    password: qwer@123
-    driver-class-name: org.postgresql.Driver
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        master:
+          url: jdbc:postgresql://localhost:5432/postgres?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowMultiQueries=true
+          username: postgres
+          password: postgres
+          driver-class-name: org.postgresql.Driver
+        slave:
+          url: jdbc:postgresql://localhost:5432/postgres?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowMultiQueries=true
+          username: postgres
+          password: postgres
+          driver-class-name: org.postgresql.Driver
 logging:
   level:
     com.application.*: info

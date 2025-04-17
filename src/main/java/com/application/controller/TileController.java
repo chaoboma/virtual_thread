@@ -1,5 +1,8 @@
 package com.application.controller;
 
+import com.application.common.CodeMsg;
+import com.application.common.Result;
+import com.application.mapper.DemoUserMapper;
 import com.application.service.TileService;
 //import io.swagger.annotations.Api;
 //import io.swagger.annotations.ApiOperation;
@@ -12,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * TileController
@@ -25,6 +29,8 @@ import java.io.InputStream;
 public class TileController {
     @Autowired
     private TileService tileService;
+    @Autowired
+    private DemoUserMapper demoUserMapper;
     @Value("${terrain.directory}")
     private String terrainDirectory;
 
@@ -100,5 +106,16 @@ public class TileController {
 
 
         return line;
+    }
+    @PostMapping(value = "/allLine")
+    public Result<Object> allLine() {
+        try{
+            String result = demoUserMapper.allUsers();
+            return Result.success(result);
+        }catch(Exception e){
+            e.printStackTrace();
+            return Result.error(CodeMsg.INTERNAL_EXCEPTION);
+        }
+
     }
 }

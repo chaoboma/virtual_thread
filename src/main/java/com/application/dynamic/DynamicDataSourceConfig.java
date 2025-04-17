@@ -8,10 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-
 import javax.sql.DataSource;
-//import java.util.HashMap;
-//import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -24,18 +21,18 @@ import java.util.concurrent.ConcurrentHashMap;
 @MapperScan("com.application.mapper")
 @Slf4j
 public class DynamicDataSourceConfig {
-    @Bean(name = DbsConstant.sqlite01)
-    @ConfigurationProperties("spring.datasource.sqlite01")
+    @Bean(name = DbsConstant.master)
+    @ConfigurationProperties("spring.datasource.dynamic.datasource.master")
     public DataSource masterDataSource() {
-        //log.info("数据源切换为：{}",DbsConstant.sqlite01);
+        log.info("数据源切换为：{}",DbsConstant.master);
         DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         return dataSource;
     }
 
-    @Bean(name = DbsConstant.select)
-    @ConfigurationProperties("spring.datasource.select")
+    @Bean(name = DbsConstant.slave)
+    @ConfigurationProperties("spring.datasource.dynamic.datasource.slave")
     public DataSource slaveDataSource() {
-        //log.info("数据源切换为：{}",DbsConstant.select);
+        log.info("数据源切换为：{}",DbsConstant.slave);
         DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         return dataSource;
     }
@@ -46,8 +43,8 @@ public class DynamicDataSourceConfig {
     @Primary
     public DynamicDataSource dynamicDataSource(){
         ConcurrentHashMap<Object, Object> dataSourceMap = new ConcurrentHashMap<>(3);
-        dataSourceMap.put(DbsConstant.sqlite01,masterDataSource());
-        dataSourceMap.put(DbsConstant.select,slaveDataSource());
+        dataSourceMap.put(DbsConstant.master,masterDataSource());
+        dataSourceMap.put(DbsConstant.slave,slaveDataSource());
         //设置动态数据源
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         dynamicDataSource.setDefaultTargetDataSource(masterDataSource());

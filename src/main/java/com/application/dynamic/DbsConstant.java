@@ -7,11 +7,8 @@ package com.application.dynamic;
  * @Version: V1.0
  */
 public class DbsConstant {
-    //sqlite_01数据库 也即：默认数据源
-    public static final String sqlite01 = "sqlite01";
-    //sqlite_02数据库
-    public static final String select = "select";
-    //oracle数据库
-    //public static final String oracle_db_01 = "oracledb01";
+    public static final String master = "master";
+    public static final String slave = "slave";
+
 
 }
