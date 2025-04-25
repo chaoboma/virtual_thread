@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.application.mapper.DemoUserMapper">
     <select id="allUsers" parameterType="String" resultType="String">
-        select '123' as value
+        select
+            id
+        from b limit 1
     </select>
+    <select id="allUsers2" parameterType="String" resultType="String">
+        select
+            id
+        from "a" limit 1
+    </select>
+
 </mapper>

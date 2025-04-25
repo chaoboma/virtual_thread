@@ -2,6 +2,8 @@ package com.application.controller;
 
 import com.application.common.CodeMsg;
 import com.application.common.Result;
+import com.application.dynamic.DataSource;
+import com.application.dynamic.DynamicDataSourceHolder;
 import com.application.mapper.DemoUserMapper;
 import com.application.service.TileService;
 //import io.swagger.annotations.Api;
@@ -111,6 +113,18 @@ public class TileController {
     public Result<Object> allLine() {
         try{
             String result = demoUserMapper.allUsers();
+            return Result.success(result);
+        }catch(Exception e){
+            e.printStackTrace();
+            return Result.error(CodeMsg.INTERNAL_EXCEPTION);
+        }
+
+    }
+    @PostMapping(value = "/allLine2")
+    public Result<Object> allLine2() {
+        try{
+            //DynamicDataSourceHolder.setDynamicDataSourceKey("slave");
+            String result = demoUserMapper.allUsers2();
             return Result.success(result);
         }catch(Exception e){
             e.printStackTrace();

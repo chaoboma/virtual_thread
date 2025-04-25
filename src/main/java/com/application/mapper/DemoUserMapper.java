@@ -1,5 +1,7 @@
 package com.application.mapper;
 
+import com.application.dynamic.DataSource;
+import com.application.dynamic.DbsConstant;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.application.entity.DemoUser;
 import com.baomidou.dynamic.datasource.annotation.DS;
@@ -18,7 +20,11 @@ import org.springframework.stereotype.Repository;
 @Component
 @Repository
 @Mapper
-@DS("master")
-public interface DemoUserMapper extends BaseMapper<DemoUser> {
+//@DS("slave")
+//@DataSource(value = DbsConstant.slave)
+public interface DemoUserMapper extends BaseMapper<Object> {
+    @DataSource(value = DbsConstant.slave)
     String allUsers();
+    @DataSource(value = DbsConstant.master)
+    String allUsers2();
 }
