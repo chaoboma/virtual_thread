@@ -4,12 +4,12 @@
     <select id="allUsers" parameterType="String" resultType="String">
         select
             id
-        from b limit 1
+        from a limit 1
     </select>
     <select id="allUsers2" parameterType="String" resultType="String">
         select
-            id
-        from "a" limit 1
+            zklb
+        from "b" limit 1
     </select>
 
 </mapper>

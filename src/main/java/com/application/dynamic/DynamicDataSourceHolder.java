@@ -22,7 +22,7 @@ public class DynamicDataSourceHolder {
      */
     public static void setDynamicDataSourceKey(String key){
         log.debug("数据源切换为：{}",key);
-        DYNAMIC_DATASOURCE_KEY.set(key);
+        DYNAMIC_DATASOURCE_KEY.set((key == null || key.equals("")) ? DbsConstant.master : key);
     }
 
     /**
@@ -30,7 +30,7 @@ public class DynamicDataSourceHolder {
      */
     public static String getDynamicDataSourceKey(){
         String key = DYNAMIC_DATASOURCE_KEY.get();
-        return key == null ? DbsConstant.master : key;
+        return key;
     }
 
     /**

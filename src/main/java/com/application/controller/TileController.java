@@ -123,7 +123,7 @@ public class TileController {
     @PostMapping(value = "/allLine2")
     public Result<Object> allLine2() {
         try{
-            //DynamicDataSourceHolder.setDynamicDataSourceKey("slave");
+            //DynamicDataSourceHolder.setDynamicDataSourceKey("master");
             String result = demoUserMapper.allUsers2();
             return Result.success(result);
         }catch(Exception e){

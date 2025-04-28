@@ -14,17 +14,17 @@ import org.springframework.stereotype.Repository;
  * 用户表 Mapper 接口
  * </p>
  *
- * @author liurb
- * @since 2024-05-18
+ * @author chaoboma
+ * @since 2025-04-18
  */
 @Component
 @Repository
 @Mapper
 //@DS("slave")
-//@DataSource(value = DbsConstant.slave)
+@DataSource
 public interface DemoUserMapper extends BaseMapper<Object> {
-    @DataSource(value = DbsConstant.slave)
+    //@DataSource(value = DbsConstant.slave)
     String allUsers();
-    @DataSource(value = DbsConstant.master)
+    //@DataSource(value = DbsConstant.slave)
     String allUsers2();
 }
