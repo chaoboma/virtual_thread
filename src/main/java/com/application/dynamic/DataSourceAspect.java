@@ -24,7 +24,7 @@ import java.util.Objects;
 @Component
 public class DataSourceAspect {
     // 设置DataSource注解的切点表达式
-    @Pointcut("execution(* com.application.mapper.*.*(..))")
+    @Pointcut("@annotation(com.application.dynamic.DataSource)" + "|| @within(com.application.dynamic.DataSource)")
     public void dynamicDataSourcePointCut(){}
 
     //环绕通知
