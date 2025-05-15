@@ -94,7 +94,7 @@ public class TileServiceImpl implements TileService {
                 e.printStackTrace();
             }
             log.debug("query end:"+System.currentTimeMillis());
-
+            DynamicDataSourceHolder.removeDynamicDataSourceKey();
             //关闭数据源连接
             //druidDataSource.close();
         }
@@ -159,7 +159,7 @@ public class TileServiceImpl implements TileService {
                 e.printStackTrace();
             }
             log.debug("query end:"+System.currentTimeMillis());
-            
+            DynamicDataSourceHolder.removeDynamicDataSourceKey();
             //关闭数据源连接
             //druidDataSource.close();
         }
